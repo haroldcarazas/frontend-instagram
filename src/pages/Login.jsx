@@ -22,7 +22,7 @@ function Login() {
           Nombre de usuario: <input type='text' name='username' />
         </label>
         <label>
-          Contraseña: <input type='password' name='password' />
+          Contraseña: <input type='text' name='password' />
         </label>
         <button type='submit'>Ingresar</button>
       </form>
