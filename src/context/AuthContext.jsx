@@ -23,8 +23,12 @@ export const AuthContextProvider = ({ children }) => {
     },
   });
 
+  const setUserData = data => {
+    setUser(data);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loginMutation }}>
+    <AuthContext.Provider value={{ user, loginMutation, setUserData }}>
       {children}
     </AuthContext.Provider>
   );
