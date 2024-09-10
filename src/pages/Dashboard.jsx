@@ -1,11 +1,20 @@
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const { user } = useContext(AuthContext);
-  console.log(user);
+  const setLocation = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    console.clear();
+    setLocation('/');
+  };
+
   return (
     <main>
+      <button onClick={handleLogout}>Cerrar sesión</button>
       <h1 className='text-3xl'>¡Bienvenido!</h1>
       <img
         className='w-[200px]'
