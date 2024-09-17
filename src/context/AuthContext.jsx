@@ -2,13 +2,13 @@
 import { useMutation } from '@tanstack/react-query';
 import { createContext, useState } from 'react';
 import { login } from '../api/authApi';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const setLocation = useNavigate();
+  const [, navigate] = useLocation();
 
   const loginMutation = useMutation({
     mutationKey: ['login'],
@@ -19,7 +19,7 @@ export const AuthContextProvider = ({ children }) => {
     onSuccess: data => {
       alert(data.message);
       localStorage.setItem('authToken', data.token);
-      setLocation('/dashboard');
+      navigate('/dashboard');
     },
   });
 

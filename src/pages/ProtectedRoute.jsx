@@ -1,12 +1,14 @@
+/* eslint-disable react/prop-types */
 import { useQuery } from '@tanstack/react-query';
-import { Outlet, Navigate } from 'react-router-dom';
+import { useLocation } from 'wouter';
 import { getMyInformation } from '../api/authApi';
 import Loading from '../components/Loading';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
-function ProtectedRoute() {
+function ProtectedRoute({ children }) {
   const authToken = localStorage.getItem('authToken');
+  const [, navigate] = useLocation();
   const { setUserData } = useContext(AuthContext);
   const { data, isError, isLoading } = useQuery({
     queryKey: ['user'],
@@ -28,10 +30,10 @@ function ProtectedRoute() {
   if (!authToken || (isError && !data)) {
     localStorage.removeItem('authToken');
     console.clear();
-    return <Navigate to='/' replace={true} />;
+    return navigate('/');
   }
 
-  return <Outlet />;
+  return children;
 }
 
 export default ProtectedRoute;
