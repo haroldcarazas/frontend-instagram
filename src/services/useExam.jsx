@@ -1,15 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-import { getExamenesByCurso } from '../api/examApi';
+import { getExamenById, getExamenesByCurso } from '../api/examApi';
 
-function useExam({ cursoId }) {
+function useExam({ cursoId, examenId }) {
   const token = localStorage.getItem('authToken');
 
-  const { data, isLoading, isError } = useQuery({
+  const { data: examenes, isLoading: isExamenesLoading } = useQuery({
     queryKey: ['examenes'],
     queryFn: () => getExamenesByCurso(token, cursoId),
+    enabled: Boolean(cursoId),
   });
 
-  return { examenes: data, isLoading, isError };
+  const { data: examen, isLoading: isExamenLoading } = useQuery({
+    queryKey: ['examen'],
+    queryFn: () => getExamenById(token, examenId),
+    enabled: Boolean(examenId),
+  });
+
+  return { examenes, examen, isExamenLoading, isExamenesLoading };
 }
 
 export default useExam;

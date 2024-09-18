@@ -2,13 +2,13 @@ import { useParams } from 'wouter';
 import MainLayout from '../layouts/MainLayout';
 import useExam from '../services/useExam';
 import ExamCard from '../components/ExamCard';
-import Loading from '../components/Loading';
+import Loading from '../components/loading/Loading';
 
 function Course() {
   const { id } = useParams();
-  const { examenes, isLoading } = useExam({ cursoId: id });
+  const { examenes, isExamenesLoading } = useExam({ cursoId: id });
 
-  if (isLoading) {
+  if (isExamenesLoading) {
     return <Loading />;
   }
 
