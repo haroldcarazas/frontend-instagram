@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
 import { useQuery } from '@tanstack/react-query';
 import { useLocation } from 'wouter';
 import { getMyInformation } from '../api/authApi';
-import Loading from '../components/Loading';
+// import Loading from '../components/Loading';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
@@ -23,9 +22,9 @@ function ProtectedRoute({ children }) {
     }
   }, [data, isError, setUserData, isLoading]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   if (!authToken || (isError && !data)) {
     localStorage.removeItem('authToken');

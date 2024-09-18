@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from 'wouter';
 
-function CursoCard({ id, nombre }) {
+function CourseCard({ id, nombre }) {
   return (
     <Link
       to={`/courses/${id}`}
@@ -12,9 +12,9 @@ function CursoCard({ id, nombre }) {
   );
 }
 
-CursoCard.propTypes = {
+CourseCard.propTypes = {
   id: PropTypes.any.isRequired,
   nombre: PropTypes.string.isRequired,
 };
 
-export default CursoCard;
+export default CourseCard;

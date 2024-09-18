@@ -14,10 +14,9 @@ export const AuthContextProvider = ({ children }) => {
     mutationKey: ['login'],
     mutationFn: login,
     onError: error => {
-      alert(error.response.data.message);
+      console.log(error.response.data.message);
     },
     onSuccess: data => {
-      alert(data.message);
       localStorage.setItem('authToken', data.token);
       navigate('/dashboard');
     },
