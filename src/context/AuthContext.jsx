@@ -8,6 +8,7 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [videoBlobUrl, setVideoBlobUrl] = useState(null);
   const [, navigate] = useLocation();
 
   const loginMutation = useMutation({
@@ -26,8 +27,20 @@ export const AuthContextProvider = ({ children }) => {
     setUser(data);
   };
 
+  const setVideoUrl = url => {
+    setVideoBlobUrl(url);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loginMutation, setUserData }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        videoBlobUrl,
+        loginMutation,
+        setUserData,
+        setVideoUrl,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

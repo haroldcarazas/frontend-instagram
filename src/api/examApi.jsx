@@ -16,3 +16,15 @@ export const getExamenById = async (token, examenId) => {
   });
   return res.data;
 };
+
+export const postResultExamen = async ({ token, data, examId, userId }) => {
+  const res = await axios.post(
+    `http://localhost:3000/api/results?examId=${examId}&userId=${userId}`,
+    data,
+    {
+      headers: { Authorization: token },
+    }
+  );
+
+  return res.data;
+};

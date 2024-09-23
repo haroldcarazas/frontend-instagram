@@ -1,10 +1,11 @@
 import { string, number } from 'prop-types';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { useReactMediaRecorder } from 'react-media-recorder';
 import StartRecordingButton from '../buttons/StartRecordingButton';
 import StopRecordingButton from '../buttons/StopRecordingButton';
 import PauseRecordingButton from '../buttons/PauseRecordingButton';
 import ResumeRecordingButton from '../buttons/ResumeRecordingButton';
+import { AuthContext } from '../../context/AuthContext';
 
 function PreguntaVideo({ pregunta, numero }) {
   const videoRef = useRef(null);
@@ -17,7 +18,11 @@ function PreguntaVideo({ pregunta, numero }) {
     mediaBlobUrl,
     previewStream,
   } = useReactMediaRecorder({ video: true, audio: true });
-  console.log(status);
+  const { setVideoUrl } = useContext(AuthContext);
+
+  useEffect(() => {
+    setVideoUrl(mediaBlobUrl);
+  }, [mediaBlobUrl, setVideoUrl]);
 
   useEffect(() => {
     if (videoRef.current && previewStream) {
